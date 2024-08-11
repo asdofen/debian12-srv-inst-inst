@@ -120,5 +120,39 @@ Then issue mount command
 sudo mount /dev/*drive id* /path/to/mount/folder
 ```
 
+If there is error "unknown format ntfs", install ntfs-3g:
+```bash
+sudo apt install ntfs-3g
+```
 
+# Setup VPN with pivpn
 
+```bash
+sudo apt install curl 
+curl -L https://install.pivpn.io | bash
+```
+
+After installation process create pivpn client:
+```bash
+pivpn -a
+```
+
+Enable routing by creating config:
+```bash
+sudo nano /etc/sysctl.d/70-wireguard-routing.conf
+```
+
+And add into file:
+```bash
+net.ipv4.ip_forward = 1
+```
+
+Run:
+```bash
+sudo sysctl -p /etc/sysctl.d/70-wireguard-routing.conf -w
+```
+
+To masquerade the traffic from the VPN, one simple rule is needed:
+```bash
+sudo iptables -t nat -A POSTROUTING -s x.x.x.x/x -o *eth0* -j MASQUERADE
+```
