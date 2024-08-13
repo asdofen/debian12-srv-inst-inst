@@ -23,8 +23,8 @@ echo ::: Turning off Sleep, Hibernate, and Suspend :::
 
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
-echo ::: Installing some necessary apps :::
 
+echo ::: Installing some necessary apps :::
 
 apt update && apt -y upgrade
 apt install -y samba tightvncserver dbus-x11 lxqt pivpn cockpit-client nginx speedtest-cli cbm firefox
